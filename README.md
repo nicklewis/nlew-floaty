@@ -1,23 +1,9 @@
-
 # floaty
-
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
-
-
-
-
-
-
 
 #### Table of Contents
 
 1. [Description](#description)
 2. [Setup - The basics of getting started with floaty](#setup)
-    * [What floaty affects](#what-floaty-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with floaty](#beginning-with-floaty)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -25,57 +11,75 @@ The README template below provides a starting point with details about what info
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what problem it solves. This is your 30-second elevator pitch for your module. Consider including OS/Puppet version it works with.
-
-You can give more descriptive information in a second paragraph. This paragraph should answer the questions: "What does this module *do*?" and "Why would I use it?" If your module has a range of functionality (installation, configuration, management, etc.), this is the time to mention it.
+This module provides Puppet tasks and functions that use [vmfloaty](https://github.com/briancain/vmfloaty) to interact with [Puppet's vmpooler application](https://github.com/puppetlabs/vmpooler).
 
 ## Setup
 
-### What floaty affects **OPTIONAL**
+Currently, this module requires that the `vmfloaty` gem is installed on the target node and that any necessary configuration is present in `~/.vmfloaty.yml`:
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
-
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with floaty
-
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+```yaml
+url: https://vmpooler.example.com
+token: '<vmpooler_api_token>'
+```
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the fancy stuff with your module here. It's especially helpful if you include usage examples and code samples for doing things with your module.
+The simplest way to test out the module is to run it against `localhost` with [Bolt](https://github.com/puppetlabs/bolt):
+
+```sh
+$ bolt task run floaty::get platform=centos-7-x86_64 count=2 --nodes localhost
+Started on localhost...
+Finished on localhost:
+  {
+    "nodes": [
+      "t8vhnjwomf59htp.example.com",
+      "ft0jdxrgv899r0r.example.com"
+    ]
+  }
+Successful on 1 node: localhost
+Ran on 1 node in 0.52 seconds
+```
 
 ## Reference
 
-Users need a complete list of your module's classes, types, defined types providers, facts, and functions, along with the parameters for each. You can provide this list either via Puppet Strings code comments or as a complete list in the README Reference section.
+### Tasks
 
-* If you are using Puppet Strings code comments, this Reference section should include Strings information so that your users know how to access your documentation.
+#### `floaty::get`
 
-* If you are not using Puppet Strings, include a list of all of your classes, defined types, and so on, along with their parameters. Each element in this listing should include:
+This task retrieve a set of nodes from vmpooler.
 
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
+##### Parameters
+
+`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)
+`count` : How many nodes to retrieve (defaults to 1 if not specified)
+
+##### Output
+
+On success, the result will contain a `nodes` key, which is an array of the retrieved nodes. On failure, the result will contain an `_error` key describing the problem.
+
+### Functions
+
+#### `floaty::get(platform, count)`
+
+This function retrieves a node or list of nodes from vmpooler by running `floaty` *locally*.
+
+##### Parameters
+
+`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)
+`count` : How many nodes to retrieve (defaults to 1 if not specified)
+
+##### Value
+
+If one node was requested, the value is the name of node retrieved. If multiple nodes were requested, the value is an array of retrieved node names.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there are Known Issues, you might want to include them under their own heading here.
+This module is currently only intended to solve a very specific use case, so it's probably quite fragile in cases where floaty itself isn't set up properly.
+
+Currently, the `floaty::get` task only supports retrieving nodes from one pool at a time.
+
+Use with caution.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+Pull requests welcome!
