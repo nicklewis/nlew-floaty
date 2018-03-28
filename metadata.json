@@ -2,10 +2,18 @@
   "name": "nlew-floaty",
   "version": "0.1.0",
   "author": "Nick Lewis",
-  "summary": "",
+  "summary": "Puppet tasks and functions for using vmfloaty",
   "license": "Apache-2.0",
-  "source": "",
-  "dependencies": [],
+  "source": "https://github.com/nicklewis/nlew-floaty",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+
+  ],
+  "requirements": [
+
+  ],
   "pdk-version": "1.4.1",
   "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
   "template-ref": "1.4.1-0-g52adbbb"
