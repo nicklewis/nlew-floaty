@@ -50,7 +50,7 @@ This task retrieve a set of nodes from vmpooler.
 
 ##### Parameters
 
-`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)
+`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)  
 `count` : How many nodes to retrieve (defaults to 1 if not specified)
 
 ##### Output
@@ -65,7 +65,7 @@ This function retrieves a node or list of nodes from vmpooler by running `floaty
 
 ##### Parameters
 
-`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)
+`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)  
 `count` : How many nodes to retrieve (defaults to 1 if not specified)
 
 ##### Value
