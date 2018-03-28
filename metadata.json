@@ -5,6 +5,8 @@
   "summary": "Puppet tasks and functions for using vmfloaty",
   "license": "Apache-2.0",
   "source": "https://github.com/nicklewis/nlew-floaty",
+  "project_page": "https://github.com/nicklewis/nlew-floaty",
+  "issues_url": "https://github.com/nicklewis/nlew-floaty/issues",
   "dependencies": [
 
   ],
