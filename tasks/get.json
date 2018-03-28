@@ -1,0 +1,14 @@
+{
+  "description": "Get a set of VMs from the vmpooler",
+  "input_method": "stdin",
+  "parameters": {
+    "platform": {
+      "description": "The kind of VM to get",
+      "type": "String[1]"
+    },
+    "count": {
+      "description": "The number of VMs to get (default: 1)",
+      "type": "Integer[1]"
+    }
+  }
+}
