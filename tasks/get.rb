@@ -7,6 +7,7 @@ args = JSON.parse(STDIN.read)
 
 platform = args['platform']
 count = args.fetch('count', 1)
+plugin = args.fetch('plugin', false)
 
 stdout, stderr, status = Open3.capture3('floaty', 'get', "#{platform}=#{count}", '--json')
 
@@ -17,7 +18,8 @@ if status != 0
 end
 
 nodes = Array(JSON.parse(stdout)[platform])
+nodes.map! { |n| { 'uri' => n } } if plugin
 
-result = {nodes: nodes}
+result = { targets: nodes }
 puts result.to_json
 exit 0

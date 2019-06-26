@@ -9,6 +9,10 @@
     "count": {
       "description": "The number of VMs to get (default: 1)",
       "type": "Integer[1]"
+    },
+    "plugin": {
+      "description": "Whether to output bare string list, or list of inventory v2 compatible hashes",
+      "type": "Optional[Boolean]"
     }
   }
 }
