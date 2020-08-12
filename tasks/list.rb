@@ -12,7 +12,7 @@ if status != 0
 end
 
 targets = stdout.split("\n").drop(1)
-targets.map! { |t| t.split(' ')[1] }
+targets.map! { |t| t.split(' ')[2] }
 
 result = { value: targets }
 puts result.to_json
