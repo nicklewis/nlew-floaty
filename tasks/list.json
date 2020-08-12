@@ -1,3 +1,10 @@
 {
-  "description": "Plugin to load active VMs to inventory"
+  "description": "Plugin to load active VMs to inventory",
+  "input_method": "environment",
+  "parameters": {
+    "service": {
+      "type": "Optional[String]",
+      "description": "The pooler service to list VMs from"
+    }
+  }
 }
