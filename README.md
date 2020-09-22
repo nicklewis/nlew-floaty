@@ -57,6 +57,25 @@ This task retrieve a set of nodes from vmpooler.
 
 On success, the result will contain a `nodes` key, which is an array of the retrieved nodes. On failure, the result will contain an `_error` key describing the problem.
 
+#### `floaty::list`
+
+This task lists active VMs, and is intended to be used as a Bolt [inventory
+plugin](https://puppet.com/docs/bolt/latest/using_plugins.html).
+
+##### Output
+
+Returns the list of active VM hostnames under the 'value' key
+
+##### Parameters
+
+`platform` : Which VM pool to retrieve nodes from (ie. `centos-7-x86_64`)  
+`count` : How many nodes to retrieve (defaults to 1 if not specified)
+
+##### Output
+
+On success, the result will contain a `nodes` key, which is an array of the retrieved nodes. On failure, the result will contain an `_error` key describing the problem.
+
+
 ### Functions
 
 #### `floaty::get(platform, count)`
